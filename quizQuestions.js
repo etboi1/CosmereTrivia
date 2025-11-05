@@ -117,5 +117,28 @@ module.exports = [
             ORDER BY RAND()
             LIMIT 3;
         `
+    },
+    {
+        id: 6,
+        question: "What order of the Knights Radiant does Dalinar Kholin belong to?",
+        correctQuery: `
+            SELECT cma.description
+            FROM characters c
+            INNER JOIN character_magic_abilities cma ON c.character_id = cma.character_id
+            WHERE c.char_first_name = 'Dalinar';
+        `,
+        wrongQuery: `
+            SELECT DISTINCT cma.specific_abilities
+            FROM characters c
+            INNER JOIN character_magic_abilities cma ON c.character_id = cma.character_id
+            INNER JOIN magic_systems ms ON cma.magic_system_id = ms.magic_system_id
+            WHERE cma.specific_abilities <> 'Bondsmith'
+                AND ms.system_name = 'Surgebinding'
+                AND cma.specific_abilities NOT LIKE '%Spren%'
+                AND cma.specific_abilities NOT LIKE '%,%'
+                AND cma.specific_abilities NOT LIKE 'ing'
+            ORDER BY RAND()
+            LIMIT 3;
+        `
     }
 ]
