@@ -22,7 +22,12 @@ const quizData = [
   }
 ];
 
-let currentQuestionIndex = 0;
+async function fetchQuestion() {
+  const res = await fetch('/question');
+  return await res.json();
+}
+
+let questionCount = 0;
 let score = 0;
 
 const questionEl = document.getElementById("question");
@@ -34,8 +39,8 @@ function startQuiz() {
   showQuestion();
 }
 
-function showQuestion() {
-  const current = quizData[currentQuestionIndex];
+async function showQuestion() {
+  const current = await fetchQuestion();
   questionEl.textContent = current.question;
   optionsEl.innerHTML = "";
 
@@ -66,8 +71,8 @@ function selectAnswer(selected, correct) {
 }
 
 nextBtn.addEventListener("click", () => {
-  currentQuestionIndex++;
-  if (currentQuestionIndex < quizData.length) {
+  questionCount++;
+  if (questionCount < 5) {
     showQuestion();
   } else {
     showResult();
@@ -78,7 +83,7 @@ function showResult() {
   questionEl.textContent = "Quiz Complete!";
   optionsEl.innerHTML = "";
   nextBtn.classList.add("hidden");
-  resultEl.textContent = `You got ${score} out of ${quizData.length} correct!`;
+  resultEl.textContent = `You got ${score} out of 5 correct!`;
   resultEl.classList.remove("hidden");
 }
 
