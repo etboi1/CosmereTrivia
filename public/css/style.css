@@ -16,7 +16,7 @@ body {
   justify-content: space-between;
 
   /* --- CUSTOM BACKGROUND IMAGE HERE --- */
-  background-image: url("images/CosmereBackground.jpg");
+  background-image: url("/public/images/CosmereBackground.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
