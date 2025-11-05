@@ -37,7 +37,9 @@ function getRandomQuestion() {
 
 // Example route (queries DB)
 app.get('/', async (req, res) => res.render('index', { title: 'Cosmere Trivia Quiz - Welcome!'}));
-app.get('/quiz', async (req, res) => {
+app.get('/quiz', async (req, res) => res.render('quiz', { title: 'Cosmere Trivia Quiz - Quiz'}));
+
+app.get('/question', async (req, res) => {
   try {
     const questionObject = getRandomQuestion();
     const [correctRows] = await db.raw(questionObject.correctQuery);
