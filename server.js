@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Example route (queries DB)
 app.get('/', async (req, res) => res.render('index', { title: 'Cosmere Trivia Quiz - Welcome!'}));
-app.get('/quiz', (res, req) => res.render('quiz', { title: 'Cosmere Trivia Quiz - Take Quiz'}));
+app.get('/quiz', (req, res) => res.render('quiz', { title: 'Cosmere Trivia Quiz - Take Quiz'}));
 
 // Start server
 app.listen(PORT, () => {
