@@ -12,10 +12,10 @@ module.exports = [
             SELECT planet_name AS answer
             FROM planets
             WHERE planet_name NOT IN (
-                SELECT p.planet_name AS answer
+                SELECT p.planet_name
                 FROM characters c
                 INNER JOIN planets p ON c.planet_of_origin = p.planet_id
-                WHERE c.char_first_name = 'Hoid (Wit)';
+                WHERE c.char_first_name = 'Hoid (Wit)'
             )
             ORDER BY RAND()
             LIMIT 3;
@@ -53,16 +53,17 @@ module.exports = [
         id: 3,
         question: "What type of spren is Glys?",
         correctQuery: `
-            SELECT cma.description AS answer
+            SELECT cma.specific_abilities AS answer
             FROM characters c
             INNER JOIN character_magic_abilities cma ON c.character_id = cma.character_id
             WHERE c.char_first_name = 'Glys';
         `,
         wrongQuery: `
-            SELECT cma.description AS answer
+            SELECT cma.specific_abilities AS answer
             FROM characters c
             INNER JOIN character_magic_abilities cma ON c.character_id = cma.character_id
             WHERE c.char_first_name <> 'Glys'
+                AND cma.specific_abilities LIKE '%Spren'
             ORDER BY RAND()
             LIMIT 3;
         `
@@ -122,7 +123,7 @@ module.exports = [
         id: 6,
         question: "What order of the Knights Radiant does Dalinar Kholin belong to?",
         correctQuery: `
-            SELECT cma.description AS answer
+            SELECT cma.specific_abilities AS answer
             FROM characters c
             INNER JOIN character_magic_abilities cma ON c.character_id = cma.character_id
             WHERE c.char_first_name = 'Dalinar';
@@ -136,7 +137,7 @@ module.exports = [
                 AND ms.system_name = 'Surgebinding'
                 AND cma.specific_abilities NOT LIKE '%Spren%'
                 AND cma.specific_abilities NOT LIKE '%,%'
-                AND cma.specific_abilities NOT LIKE 'ing'
+                AND cma.specific_abilities NOT LIKE '%ing'
             ORDER BY RAND()
             LIMIT 3;
         `
@@ -204,12 +205,12 @@ module.exports = [
         id: 10,
         question: "What is AonDor?",
         correctQuery: `
-            SELECT description
+            SELECT description AS answer
             FROM magic_systems
             WHERE system_name = 'AonDor';
         `,
         wrongQuery: `
-            SELECT description
+            SELECT description AS answer
             FROM magic_systems
             WHERE system_name NOT IN ('AonDor', 'Allomancy', 'Bloodsealing', 'Feruchemy', 'Hemalurgy', 'Surgebinding', 'Navigation', 'Yolish Lightweaving')
             ORDER BY RAND()

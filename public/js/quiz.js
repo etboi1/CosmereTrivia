@@ -59,9 +59,9 @@ function selectAnswer(selected, correct) {
   const buttons = document.querySelectorAll(".option-btn");
   buttons.forEach(btn => {
     btn.disabled = true;
-    if (btn.textContent === correct) {
+    if (btn.textContent == correct) {
       btn.style.background = "linear-gradient(45deg, #6aff00, #2ecc71)";
-    } else if (btn.textContent === selected) {
+    } else if (btn.textContent == selected) {
       btn.style.background = "linear-gradient(45deg, #ff4d4d, #cc0000)";
     }
   });

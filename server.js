@@ -30,7 +30,7 @@ function getRandomQuestion() {
     return getRandomQuestion();
   }
 
-  const randomQuestion = available[Math.floor(Math.random() * available.lentgth)];
+  const randomQuestion = available[Math.floor(Math.random() * available.length)];
   usedQuestions.add(randomQuestion.id);
   return randomQuestion;
 }
